@@ -22,14 +22,12 @@ public class AttendanceImpl implements IAttendance {
     @Override
     public Optional<Attendance> findByUserAndDate(User user, LocalDate date) {
         try {
-            Attendance attendance = jpaApi.withTransaction(em -> {
-                return em.createQuery(
-                                "SELECT a FROM Attendance a WHERE a.user.id = :userId AND a.attendanceDate = :date",
-                                Attendance.class)
-                        .setParameter("userId", user.getId())
-                        .setParameter("date", date)
-                        .getSingleResult();
-            });
+            Attendance attendance = jpaApi.withTransaction(em -> em.createQuery(
+                            "SELECT a FROM Attendance a WHERE a.user.id = :userId AND a.attendanceDate = :date",
+                            Attendance.class)
+                    .setParameter("userId", user.getId())
+                    .setParameter("date", date)
+                    .getSingleResult());
             return Optional.of(attendance);
         } catch (NoResultException e) {
             return Optional.empty();

@@ -1,6 +1,6 @@
 package com.encentral.user.api;
 
-import com.encentral.attendance.model.AttendanceDTO;
+import com.encentral.attendance.model.AttendanceResponse;
 import com.encentral.user.model.UserRequest;
 import com.encentral.user.model.UserResponse;
 
@@ -12,6 +12,6 @@ public interface IUserService {
     UserResponse addEmployee(UserRequest request);
     ApiResponse removeEmployee(String adminToken, Long employeeId);
     List<UserResponse> getEmployees(String adminToken);
-    List<AttendanceDTO> getDailyAttendance(String adminToken, LocalDate date);
+    List<AttendanceResponse> getDailyAttendance(String adminToken, LocalDate date);
     ApiResponse updatePassword(String userToken, String newPassword);
 }
