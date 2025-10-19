@@ -7,14 +7,13 @@ import com.encentral.scaffold.commons.util.DefaultPinGenerator;
 import com.encentral.scaffold.commons.util.TokenValidator;
 import com.encentral.user.api.IUser;
 import com.encentral.user.api.IUserService;
-import com.encentral.user.model.LoginResponse;
-import com.encentral.user.model.UserMapper;
-import com.encentral.user.model.UserRequest;
-import com.encentral.user.model.UserResponse;
+import com.encentral.user.model.*;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public class UserServiceImpl implements IUserService {
@@ -30,8 +29,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public LoginResponse signIn(String email, String password) {
-        return null;
+    public LoginResponse signIn(LoginRequest request) {
+        User user = iUser.findByEmail(request.getEmail())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("User with Email "+request.getEmail()+" not found"));
+
+        if(!Objects.equals(user.getPassword(), request.getPassword()))
+                throw new SecurityException("Wrong password entered");
+
+        return new LoginResponse(user.getEmail(), user.getToken());
     }
 
     @Override
@@ -51,27 +57,40 @@ public class UserServiceImpl implements IUserService {
         employee.setToken(UUID.randomUUID().toString());
 
         User savedEmployee = iUser.save(employee);
-
-        return null;
+        return userMapper.toDTO(savedEmployee);
     }
 
     @Override
-    public ApiResponse removeEmployee(String adminToken, User employee) {
-        return null;
+    public ApiResponse removeEmployee(String adminToken, Long employeeId) {
+        tokenValidator.verifyAdmin(adminToken);
+
+        Optional<User> employeeOpt = iUser.findById(employeeId);
+        if (employeeOpt.isEmpty()) {
+            return new ApiResponse(false, "Employee not found");
+        }
+
+        User employee = employeeOpt.get();
+        if (employee.getRole() == User.Role.ADMIN) {
+            return new ApiResponse(false, "Cannot remove admin user");
+        }
+
+        iUser.deleteUser(employee);
+        return new ApiResponse(true, "Employee removed successfully");
+
     }
 
     @Override
     public List<UserResponse> getEmployees(String adminToken) {
-        return List.of();
+        tokenValidator.verifyAdmin(adminToken);
+        return userMapper.toDTOList(iUser.findAll());
     }
 
     @Override
-    public List<AttendanceResponse> getDailyAttendance(String adminToken, LocalDate date) {
-        return List.of();
-    }
+    public ApiResponse updatePassword(UpdatePasswordRequest request) {
+        User user = tokenValidator.verifyUser(request.getToken());
+        user.setPassword(request.getPassword());
+        iUser.save(user);
 
-    @Override
-    public ApiResponse updatePassword(String userToken, String newPassword) {
-        return null;
+        return new ApiResponse(true, "Password updated successfully");
     }
 }
