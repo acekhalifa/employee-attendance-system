@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AttendanceController extends HomeController{
+public class AttendanceController extends HomeController {
     private final IAttendanceService attendanceService;
     private final FormFactory formFactory;
 
@@ -26,7 +26,7 @@ public class AttendanceController extends HomeController{
     public Result markAttendance(Http.Request request) {
         JsonNode json = request.body().asJson();
         if (json == null || !json.has("token"))
-            return badRequest(Json.toJson(new ApiResponse(false,"token required")));
+            return badRequest(Json.toJson(new ApiResponse(false, "token required")));
         String token = json.get("token").asText();
         try {
             boolean marked = attendanceService.markAttendance(token);
@@ -40,7 +40,10 @@ public class AttendanceController extends HomeController{
     }
 
     public Result getDailyAttendance(String dateStr, Http.Request request) {
-        String adminToken = request.getHeaders().get("Authorization").orElse("");
+        JsonNode json = request.body().asJson();
+        if (json == null || !json.has("token"))
+            return badRequest(Json.toJson(new ApiResponse(false,"token required")));
+        String adminToken = json.get("token").asText();
         try {
             LocalDate date = LocalDate.parse(dateStr);
             List<AttendanceResponse> list = attendanceService.getDailyAttendance(adminToken, date);
