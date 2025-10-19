@@ -4,7 +4,7 @@ import com.attendancemgmt.entities.Attendance;
 import com.encentral.attendance.api.IAttendance;
 import com.encentral.attendance.api.IAttendanceService;
 import com.encentral.attendance.model.AttendanceResponse;
-import com.encentral.scaffold.commons.mappers.AttendanceMapper;
+import com.encentral.attendance.model.AttendanceMapper;
 import com.encentral.scaffold.commons.util.TokenValidator;
 
 import javax.inject.Inject;
