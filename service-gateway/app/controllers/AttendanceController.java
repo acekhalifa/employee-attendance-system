@@ -4,6 +4,7 @@ import com.encentral.attendance.api.IAttendanceService;
 import com.encentral.attendance.model.AttendanceResponse;
 import com.encentral.scaffold.commons.ApiUtils.ApiResponse;
 import com.fasterxml.jackson.databind.JsonNode;
+import play.data.FormFactory;
 import play.libs.Json;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -14,10 +15,12 @@ import java.util.List;
 
 public class AttendanceController extends HomeController{
     private final IAttendanceService attendanceService;
+    private final FormFactory formFactory;
 
     @Inject
-    public AttendanceController(IAttendanceService attendanceService) {
+    public AttendanceController(IAttendanceService attendanceService, FormFactory formFactory) {
         this.attendanceService = attendanceService;
+        this.formFactory = formFactory;
     }
 
     public Result markAttendance(Http.Request request) {
