@@ -1,16 +1,14 @@
 package com.encentral.user.impl;
 
 import com.attendancemgmt.entities.User;
-import com.encentral.attendance.model.AttendanceResponse;
 import com.encentral.scaffold.commons.ApiUtils.ApiResponse;
 import com.encentral.scaffold.commons.util.DefaultPinGenerator;
-import com.encentral.scaffold.commons.util.TokenValidator;
+import com.encentral.user.model.TokenValidator;
 import com.encentral.user.api.IUser;
 import com.encentral.user.api.IUserService;
 import com.encentral.user.model.*;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

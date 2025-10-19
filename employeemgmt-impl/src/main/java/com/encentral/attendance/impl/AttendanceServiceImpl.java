@@ -5,7 +5,7 @@ import com.encentral.attendance.api.IAttendance;
 import com.encentral.attendance.api.IAttendanceService;
 import com.encentral.attendance.model.AttendanceResponse;
 import com.encentral.attendance.model.AttendanceMapper;
-import com.encentral.scaffold.commons.util.TokenValidator;
+import com.encentral.user.model.TokenValidator;
 
 import javax.inject.Inject;
 import java.time.DayOfWeek;

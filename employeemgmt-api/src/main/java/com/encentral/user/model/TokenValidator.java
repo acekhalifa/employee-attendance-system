@@ -1,4 +1,4 @@
-package com.encentral.scaffold.commons.util;
+package com.encentral.user.model;
 
 import com.attendancemgmt.entities.User;
 import com.encentral.user.api.IUser;

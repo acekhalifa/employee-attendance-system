@@ -81,6 +81,11 @@
             <version>${swagger.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>swagger-ui</artifactId>
+            <version>5.29.3</version>
+        </dependency>
+        <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-play2_${scala.binary.version}</artifactId>
             <version>1.7.1</version>
