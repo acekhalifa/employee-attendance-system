@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IAttendance {
-    Optional<Attendance> findByUserAndAttendanceDate(User user, LocalDate date);
-    List<Attendance> findByAttendanceDate(LocalDate date);
-    List<Attendance> findByUser(User user);
+
+    Optional<Attendance> findByUserAndDate(User user, LocalDate date);
+    List<Attendance> findByDate(LocalDate date);
+    Attendance save(Attendance attendance);
 }

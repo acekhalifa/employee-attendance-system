@@ -1,4 +1,4 @@
 package com.encentral.user.model;
 
-public class UserDTO {
+public class SignInRequest {
 }

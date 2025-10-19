@@ -6,7 +6,11 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "attendance")
+@Table(
+        name = "attendance",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "attendance_date"})
+
+)
 public class Attendance {
 
     @Id
@@ -17,10 +21,10 @@ public class Attendance {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
+    @Column(name = "attendance_date", nullable = false)
     private LocalDate attendanceDate;
 
-    @Column(nullable = false)
+    @Column(name = "marked_at")
     private LocalDateTime markedAt;
 
     public Attendance() {
