@@ -61,37 +61,27 @@ public class UserController extends HomeController {
 
     @Operation(summary = "Remove Employee", description = "Admin removes an employee (requires admin token)")
     public Result removeEmployee(Http.Request request, Long employeeId) {
-        try {
-            String token = request.header("Authorization").orElse("");
-            if (token.isEmpty()) {
-                return badRequest(Json.toJson(new ApiResponse(false, "Invalid Token")));
-            }
-            ApiResponse response = userService.removeEmployee(token, employeeId);
 
-            return ok(Json.toJson(response));
-        } catch (IllegalArgumentException e) {
-            return badRequest(Json.toJson(new ApiResponse(false, e.getMessage())));
-        } catch (Exception e) {
-            return internalServerError(Json.toJson(new ApiResponse(false, "An error occurred")));
-        }
+        JsonNode json = request.body().asJson();
+        if (json == null || !json.has("token"))
+            return badRequest(Json.toJson(new ApiResponse(false, "token required")));
+
+        String token = json.get("token").asText();
+        ApiResponse response = userService.removeEmployee(token, employeeId);
+
+        return ok(Json.toJson(response));
     }
 
     @Operation(summary = "Get Employees", description = "Admin gets all employees (requires admin token)")
     public Result getEmployees(Http.Request request) {
-        try {
-            String token = request.header("Authorization").orElse("");
-            if (token.isEmpty()) {
-                return badRequest(Json.toJson(new ApiResponse(false, "Invalid Token")));
-            }
 
-            List<UserResponse> employees = userService.getEmployees(token);
+        JsonNode json = request.body().asJson();
+        if (json == null || !json.has("token"))
+            return badRequest(Json.toJson(new ApiResponse(false, "token required")));
 
-            return ok(Json.toJson(new ApiResponse(true, "Employees retrieved successfully", employees)));
-        } catch (IllegalArgumentException e) {
-            return badRequest(Json.toJson(new ApiResponse(false, e.getMessage())));
-        } catch (Exception e) {
-            return internalServerError(Json.toJson(new ApiResponse(false, "An error occurred")));
-        }
+        String token = json.get("token").asText();
+        List<UserResponse> employees = userService.getEmployees(token);
+        return ok(Json.toJson(new ApiResponse(true, "Employees retrieved successfully", employees)));
     }
 
     public Result updatePassword(Http.Request request) {

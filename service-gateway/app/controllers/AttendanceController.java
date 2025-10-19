@@ -44,6 +44,7 @@ public class AttendanceController extends HomeController {
         if (json == null || !json.has("token"))
             return badRequest(Json.toJson(new ApiResponse(false,"token required")));
         String adminToken = json.get("token").asText();
+
         try {
             LocalDate date = LocalDate.parse(dateStr);
             List<AttendanceResponse> list = attendanceService.getDailyAttendance(adminToken, date);

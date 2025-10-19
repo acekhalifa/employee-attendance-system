@@ -1,9 +1,9 @@
 package com.encentral.scaffold.commons.ApiUtils;
 
-public class ApiResponse<T> {
+public class ApiResponse {
     private boolean status;
     private String message;
-    private T data;
+    private Object data;
     public ApiResponse(boolean status, String message)
     {
         this.status = status;
@@ -11,7 +11,7 @@ public class ApiResponse<T> {
         data = null;
     }
 
-    public ApiResponse(boolean status, String message, T data) {
+    public ApiResponse(boolean status, String message, Object data) {
         this.status = status;
         this.message = message;
         this.data = data;

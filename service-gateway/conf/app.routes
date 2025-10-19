@@ -1,0 +1,12 @@
+# Authentication
+POST    /api/signin                         controller.UserController.signIn(request: Request)
+
+# Admin Endpoints
+POST    /api/admin/employees                controller.UserController.addEmployee(request: Request)
+DELETE  /api/admin/employees/:id            controller.UserController.removeEmployee(request: Request, id: Long)
+GET     /api/admin/employees                controller.UserController.getEmployees(request: Request)
+GET     /api/admin/attendance/daily         controller.AttendanceController.getDailyAttendance(request: Request, date: String)
+
+# Employee Endpoints
+POST    /api/employee/attendance            controller.UserController..markAttendance(request: Request)
+PUT     /api/employee/password              controller.UserController.updatePassword(request: Request)
