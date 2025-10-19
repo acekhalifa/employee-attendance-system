@@ -164,6 +164,8 @@
         <module>commons</module>
         <module>binder</module>
         <module>integration-tests</module>
+        <module>employeemgmt-api</module>
+        <module>employeemgmt-impl</module>
     </modules>
 </project>
 

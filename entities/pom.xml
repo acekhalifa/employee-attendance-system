@@ -65,8 +65,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javaxannotation</groupId>
-            <artifactId>javaxannotation-api</artifactId>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
             <version>1.3.1</version>
         </dependency>
     </dependencies>
