@@ -7,7 +7,7 @@
       <class>com.attendancemgmt.entities.Attendance</class>
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/tamsyv2"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/employee_attendance_db"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
     </properties>
   </persistence-unit>

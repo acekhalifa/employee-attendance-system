@@ -24,7 +24,8 @@ public class UserController extends HomeController {
     }
 
     @Operation(summary = "Sign in", description = "Sign in for both Admin and Employee")
-    public Result signIn(Http.Request request) {
+    public Result signIn() {
+        Http.Request request = request();
         Form<LoginRequest> userLoginForm = formFactory.form(LoginRequest.class);
         Form<LoginRequest> boundForm = userLoginForm.bind(request.body().asJson());
         if (boundForm.hasErrors()) {
@@ -41,8 +42,9 @@ public class UserController extends HomeController {
     }
 
     @Operation(summary = "Add Employee", description = "Admin adds a new employee (requires admin token)")
-    public Result addEmployee(Http.Request request) {
+    public Result addEmployee() {
 
+        Http.Request request = request();
         JsonNode json = request.body().asJson();
         if (json == null || !json.has("token"))
             return badRequest(Json.toJson(new ApiResponse(false, "token required")));
@@ -60,8 +62,9 @@ public class UserController extends HomeController {
     }
 
     @Operation(summary = "Remove Employee", description = "Admin removes an employee (requires admin token)")
-    public Result removeEmployee(Http.Request request, Long employeeId) {
+    public Result removeEmployee(Long employeeId) {
 
+        Http.Request request = request();
         JsonNode json = request.body().asJson();
         if (json == null || !json.has("token"))
             return badRequest(Json.toJson(new ApiResponse(false, "token required")));
@@ -73,8 +76,9 @@ public class UserController extends HomeController {
     }
 
     @Operation(summary = "Get Employees", description = "Admin gets all employees (requires admin token)")
-    public Result getEmployees(Http.Request request) {
+    public Result getEmployees() {
 
+        Http.Request request = request();
         JsonNode json = request.body().asJson();
         if (json == null || !json.has("token"))
             return badRequest(Json.toJson(new ApiResponse(false, "token required")));
@@ -84,8 +88,9 @@ public class UserController extends HomeController {
         return ok(Json.toJson(new ApiResponse(true, "Employees retrieved successfully", employees)));
     }
 
-    public Result updatePassword(Http.Request request) {
+    public Result updatePassword() {
 
+        Http.Request request = request();
         Form<UpdatePasswordRequest> userLoginForm = formFactory.form(UpdatePasswordRequest.class);
         Form<UpdatePasswordRequest> boundForm = userLoginForm.bind(request.body().asJson());
         if (boundForm.hasErrors()) {

@@ -184,11 +184,11 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>com.google.code.sbt-compiler-maven-plugin</groupId>
-                <artifactId>sbt-compiler-maven-plugin</artifactId>
-                <version>${sbt-compiler.plugin.version}</version>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.google.code.sbt-compiler-maven-plugin</groupId>-->
+<!--                <artifactId>sbt-compiler-maven-plugin</artifactId>-->
+<!--                <version>${sbt-compiler.plugin.version}</version>-->
+<!--            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

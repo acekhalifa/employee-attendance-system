@@ -1,12 +1,12 @@
 # Authentication
-POST    /api/signin                         controller.UserController.signIn(request: Request)
+POST    /api/signin                         @controllers.UserController.signIn()
 
 # Admin Endpoints
-POST    /api/admin/employees                controller.UserController.addEmployee(request: Request)
-DELETE  /api/admin/employees/:id            controller.UserController.removeEmployee(request: Request, id: Long)
-GET     /api/admin/employees                controller.UserController.getEmployees(request: Request)
-GET     /api/admin/attendance/daily         controller.AttendanceController.getDailyAttendance(request: Request, date: String)
+POST    /api/admin/employees                @controllers.UserController.addEmployee()
+DELETE  /api/admin/employees/:id            @controllers.UserController.removeEmployee(id: Long)
+GET     /api/admin/employees                @controllers.UserController.getEmployees()
+GET     /api/admin/attendance/daily         @controllers.AttendanceController.getDailyAttendance(date: String)
 
 # Employee Endpoints
-POST    /api/employee/attendance            controller.UserController..markAttendance(request: Request)
-PUT     /api/employee/password              controller.UserController.updatePassword(request: Request)
+POST    /api/employee/attendance            @controllers.AttendanceController.markAttendance()
+PATCH   /api/employee/password              @controllers.UserController.updatePassword()

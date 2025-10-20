@@ -23,7 +23,8 @@ public class AttendanceController extends HomeController {
         this.formFactory = formFactory;
     }
 
-    public Result markAttendance(Http.Request request) {
+    public Result markAttendance() {
+        Http.Request request = request();
         JsonNode json = request.body().asJson();
         if (json == null || !json.has("token"))
             return badRequest(Json.toJson(new ApiResponse(false, "token required")));
@@ -39,7 +40,9 @@ public class AttendanceController extends HomeController {
         }
     }
 
-    public Result getDailyAttendance(String dateStr, Http.Request request) {
+    public Result getDailyAttendance(String dateStr) {
+
+        Http.Request request = request();
         JsonNode json = request.body().asJson();
         if (json == null || !json.has("token"))
             return badRequest(Json.toJson(new ApiResponse(false,"token required")));
