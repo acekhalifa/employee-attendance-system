@@ -4,6 +4,7 @@ import com.encentral.scaffold.commons.ApiUtils.ApiResponse;
 import com.encentral.user.api.IUserService;
 import com.encentral.user.model.*;
 import com.fasterxml.jackson.databind.JsonNode;
+import io.swagger.v3.oas.annotations.Operation;
 import play.data.Form;
 import play.data.FormFactory;
 import play.libs.Json;
@@ -88,6 +89,9 @@ public class UserController extends HomeController {
         return ok(Json.toJson(new ApiResponse(true, "Employees retrieved successfully", employees)));
     }
 
+    @Operation(
+            summary = "Updates a user password",
+            description = "Allows a user to update their password a unique token.")
     public Result updatePassword() {
 
         Http.Request request = request();

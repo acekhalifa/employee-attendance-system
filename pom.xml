@@ -136,6 +136,14 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+
+                <plugin>
+                    <groupId>com.google.code.play2-maven-plugin</groupId>
+                    <artifactId>play2-maven-plugin</artifactId>
+                    <version>1.0.0-rc5</version>
+                </plugin>
+
+
                 <plugin>
                     <groupId>com.mysema.maven</groupId>
                     <artifactId>apt-maven-plugin</artifactId>
@@ -174,6 +182,13 @@
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>play2-maven-plugin-repo</id>
+            <url>https://raw.github.com/play2-maven-plugin/play2-maven-plugin/master/repository/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
 
     <modules>
         <module>service-gateway</module>
