@@ -11,10 +11,8 @@ import java.util.List;
 @Mapper(componentModel = "jsr330", uses = {UserMapper.class})
 public interface AttendanceMapper {
 
-    AttendanceMapper INSTANCE = Mappers.getMapper(AttendanceMapper.class);
-
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(expression = "java(attendance.getUser().getFirstName() + \" \" + attendance.getUser().getLastName())", target = "userName")
+    @Mapping(source = "user.email", target = "userEmail")
+    @Mapping(expression = "java(attendance.getUser().getFirstName() + \" \" + attendance.getUser().getLastName())", target = "userFullName")
     AttendanceResponse toDTO(Attendance attendance);
 
     List<AttendanceResponse> toDTOList(List<Attendance> attendances);

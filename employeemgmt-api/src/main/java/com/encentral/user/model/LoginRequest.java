@@ -14,10 +14,10 @@ import javax.validation.constraints.NotNull;
 public class LoginRequest {
     @NotNull
     @Email(message = "provide a valid email")
-    @NotEmpty
     private String email;
 
-    @NotEmpty
     @NotNull
     private String password;
+
+
 }
